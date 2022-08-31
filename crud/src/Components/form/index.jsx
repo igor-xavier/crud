@@ -7,7 +7,7 @@ import Painel from "../painel";
 import { useState } from "react";
 
 const Form = () => {
-  const cpfRegex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+  const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
   const formSchema = yup.object().shape({
     nome: yup.string().required("Nome obrigatório"),
 
