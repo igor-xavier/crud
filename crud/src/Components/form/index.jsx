@@ -3,6 +3,9 @@ import "./styles.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputMask from "react-input-mask";
+import Painel from "../painel";
+import { useState } from "react";
+
 const Form = () => {
   const cpfRegex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
   const formSchema = yup.object().shape({
@@ -15,7 +18,7 @@ const Form = () => {
 
     senha: yup.string().required("Senha obrigatória"),
   });
-
+  const [infos, setInfos] = useState([]);
   const {
     register,
     handleSubmit,
@@ -35,7 +38,7 @@ const Form = () => {
     }
     data.token = token;
     //O return seria um api.post
-    return console.log(data);
+    return setInfos([...infos, data]);
   };
 
   return (
@@ -57,8 +60,12 @@ const Form = () => {
           {...register("senha")}
         />
         <label>{errors.senha?.message}</label>
-        <button type="submit">Enviar</button>
+        <button type="submit">Inserir</button>
       </form>
+      <div>
+        {" "}
+        <Painel infos={infos} />
+      </div>
     </div>
   );
 };
